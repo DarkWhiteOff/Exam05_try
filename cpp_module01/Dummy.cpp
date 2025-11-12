@@ -12,5 +12,5 @@ Dummy::~Dummy(void)
 
 ATarget *Dummy::clone() const
 {
-    return (new Dummy());
+    return (new Dummy(*this));
 }
