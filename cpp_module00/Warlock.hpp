@@ -18,8 +18,8 @@ public :
     void introduce() const;
 
 private :
-    std::string name;
-    std::string title;
+    std::string m_name;
+    std::string m_title;
 
     Warlock(void);
     Warlock(Warlock const &copy);

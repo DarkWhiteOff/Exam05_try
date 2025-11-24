@@ -40,7 +40,7 @@ std::string const &ASpell::getEffects(void) const
     return (effects);
 }
 
-void ASpell::launch(ATarget const &target) const
+void ASpell::launch(ATarget const &target)
 {
     target.getHitBySpell(*this);
 }

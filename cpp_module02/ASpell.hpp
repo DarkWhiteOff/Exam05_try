@@ -22,7 +22,7 @@ class ASpell
 
         virtual ASpell *clone(void) const = 0;
 
-        void launch(ATarget const &target) const;
+        void launch(ATarget const &target);
 
     protected :
         std::string name;
