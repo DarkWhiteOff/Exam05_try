@@ -45,7 +45,6 @@ int init_game(t_game *game, char **argv)
     game->width = atoi(argv[1]);
     game->height = atoi(argv[2]);
     game->iterations = atoi(argv[3]);
-    game->pen = 0;
     game->board = (char **)malloc((sizeof(char *)) * game->height);
     if (!game->board)
         return (0);
@@ -69,6 +68,7 @@ void draw_board(t_game *game)
 {
     int i = 0;
     int j = 0;
+    int pen = 0;
     char key;
 
     while (read(STDIN_FILENO, &key, 1) != 0)
@@ -82,8 +82,8 @@ void draw_board(t_game *game)
         if (key == 'd' && j < (game->width - 1))
             j++;
         if (key == 'x')
-            game->pen = !(game->pen);
-        if (game->pen)
+            pen = !(pen);
+        if (pen)
             game->board[i][j] = '0';
     }
     return ;

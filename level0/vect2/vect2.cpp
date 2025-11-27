@@ -30,7 +30,17 @@ vect2::~vect2(void)
     return ;
 }
 
-vect2 operator+(vect2 const &b) const
+int vect2::getX() const
+{
+    return(m_x);
+}
+
+int vect2::getY() const
+{
+    return(m_y);
+}
+
+vect2 vect2::operator+(vect2 const &b) const
 {
     vect2 temp(*this);
 
@@ -39,7 +49,7 @@ vect2 operator+(vect2 const &b) const
     return(temp);
 }
     
-vect2 operator-(vect2 const &b) const
+vect2 vect2::operator-(vect2 const &b) const
 {
     vect2 temp(*this);
 
@@ -48,7 +58,7 @@ vect2 operator-(vect2 const &b) const
     return(temp);
 }
 
-vect2 operator*(vect2 const &b) const
+vect2 vect2::operator*(vect2 const &b) const
 {
     vect2 temp(*this);
 
@@ -57,28 +67,37 @@ vect2 operator*(vect2 const &b) const
     return(temp);
 }
 
-vect2 &operator+=(vect2 const &b)
+vect2 vect2::operator-() const
+{
+    vect2 temp(*this);
+
+    temp.m_x = -m_x;
+    temp.m_y*= -m_y;
+    return(temp);
+}
+
+vect2 &vect2::operator+=(vect2 const &b)
 {
     m_x += b.m_x;
     m_y += b.m_y;
     return(*this);
 }
 
-vect2 &operator-=(vect2 const &b)
+vect2 &vect2::operator-=(vect2 const &b)
 {
     m_x -= b.m_x;
     m_y -= b.m_y;
     return(*this);
 }
 
-vect2 &operator*=(vect2 const &b)
+vect2 &vect2::operator*=(vect2 const &b)
 {
     m_x *= b.m_x;
     m_y *= b.m_y;
     return(*this);
 }
 
-vect2 operator+(int b) const
+vect2 vect2::operator+(int b) const
 {
     vect2 temp(*this);
 
@@ -87,7 +106,7 @@ vect2 operator+(int b) const
     return(temp);
 }
 
-vect2 operator-(int b) const
+vect2 vect2::operator-(int b) const
 {
     vect2 temp(*this);
 
@@ -96,7 +115,7 @@ vect2 operator-(int b) const
     return(temp);
 }
 
-vect2 operator*(int b) const
+vect2 vect2::operator*(int b) const
 {
     vect2 temp(*this);
 
@@ -105,21 +124,21 @@ vect2 operator*(int b) const
     return(temp);
 }
 
-vect2 &operator+=(int b)
+vect2 &vect2::operator+=(int b)
 {
     m_x += b;
     m_y += b;
     return(*this);
 }
 
-vect2 &operator-=(int b)
+vect2 &vect2::operator-=(int b)
 {
     m_x -= b;
     m_y -= b;
     return(*this);
 }
 
-vect2 &operator*=(int b)
+vect2 &vect2::operator*=(int b)
 {
     m_x *= b;
     m_y *= b;
@@ -128,90 +147,74 @@ vect2 &operator*=(int b)
 
 vect2 &vect2::operator++()
 {
-    vect2 temp(*this);
-
-    temp.m_x += 1;
-    temp.m_y += 1;
-    return (temp);
-}
-    
-vect2 vect2::operator++(int)
-{
     m_x += 1;
     m_y += 1;
     return (*this);
 }
-
-vect2 &vect2::operator--()
+    
+vect2 vect2::operator++(int)
 {
     vect2 temp(*this);
 
-    temp.m_x -= 1;
-    temp.m_y -= 1;
+    m_x += 1;
+    m_y += 1;
     return (temp);
 }
 
-vect2 vect2::operator--(int)
+vect2 &vect2::operator--()
 {
     m_x -= 1;
     m_y -= 1;
     return (*this);
 }
 
-bool operator==(vect2 const &b) const
+vect2 vect2::operator--(int)
 {
-    if ((*this) == b)
+    vect2 temp(*this);
+
+    m_x -= 1;
+    m_y -= 1;
+    return (temp);
+}
+
+bool vect2::operator==(vect2 const &b) const
+{
+    if ((m_x == b.m_x) && (m_y == b.m_y))
         return true;
     return false;
 }
 
-bool operator!=(vect2 const &b) const
+bool vect2::operator!=(vect2 const &b) const
 {
-    if ((*this) != b)
+    if (!((*this) == b))
         return true;
     return false;
 }
 
-bool operator<(vect2 const &b) const
+int vect2::operator[](int b) const
 {
-    if ((*this) < b)
-        return true;
-    return false;
+    if (b == 0)
+        return (m_x);
+    return (m_y);
 }
 
-bool operator>(vect2 const &b) const
+int &vect2::operator[](int b)
 {
-    if ((*this) > b)
-        return true;
-    return false;
+    if (b == 0)
+        return (m_x);
+    return (m_y);
 }
 
-bool operator<=(vect2 const &b) const
+vect2 operator*(int b, vect2 const &obj)
 {
-    if ((*this) <= b)
-        return true;
-    return false;
-}
+    vect2 temp(obj);
 
-bool operator>=(vect2 const &b) const
-{
-    if ((*this) >= b)
-        return true;
-    return false;
-}
-
-int operator[](int b) const
-{
-    
-}
-
-int &operator[](int b)
-{
-
+    temp *= b;
+    return (temp);
 }
 
 std::ostream &operator<<(std::ostream &output, vect2 const &obj)
 {
-    std::cout << "{" << m_x << ", " << m_y << "}" << std::endl;
+    std::cout << "{" << obj.getX() << ", " << obj.getY() << "}" << std::endl;
     return (output);
 }

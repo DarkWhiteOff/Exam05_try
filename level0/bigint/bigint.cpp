@@ -1,6 +1,6 @@
 #include "bigint.hpp"
 
-bigint::bigint(void)
+bigint::bigint(void) : m_bint("0")
 {
     return ;
 }
@@ -67,7 +67,7 @@ std::string addition(bigint const &a, bigint const &b)
     std::string result;
     int digita;
     int digitb;
-    int ret;
+    int ret = 0;
     size_t len = stra.length();
     for (size_t i = 0; i < len; i++)
     {
@@ -182,44 +182,43 @@ bigint &bigint::operator>>=(bigint const &b)
 
 bool bigint::operator==(bigint const &b) const
 {
-    if ((*this) == b)
+    if (this->m_bint == b.m_bint)
         return true;
     return false;
 }
 
 bool bigint::operator!=(bigint const &b) const
 {
-    if ((*this) != b)
+    if (this->m_bint != b.m_bint) // if (!(this->m_bint == b.m_bint))
         return true;
     return false;
 }
 
 bool bigint::operator<(bigint const &b) const
 {
-    if ((*this) < b)
-        return true;
-    return false;
+    std::string stra = this->m_bint;
+    std::string strb = b.m_bint;
+    size_t lena = stra.length();
+    size_t lenb = strb.length();
+
+    if (lena < lenb)
+        return (lena < lenb);
+    return (stra < strb);
 }
 
 bool bigint::operator>(bigint const &b) const
 {
-    if ((*this) > b)
-        return true;
-    return false;
+    return (!((*this) < b));
 }
 
 bool bigint::operator<=(bigint const &b) const
 {
-    if ((*this) <= b)
-        return true;
-    return false;
+    return (((*this) < b) || ((*this) == b));
 }
 
 bool bigint::operator>=(bigint const &b) const
 {
-    if ((*this) >= b)
-        return true;
-    return false;
+    return (((*this) > b) || ((*this) == b));
 }
 
 std::ostream& operator<<(std::ostream& output, bigint const &obj)

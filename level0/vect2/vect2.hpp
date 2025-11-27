@@ -14,9 +14,14 @@ public :
     vect2 &operator=(vect2 const &copy);
     ~vect2(void);
 
+    int getX() const;
+    int getY() const;
+
     vect2 operator+(vect2 const &b) const;
     vect2 operator-(vect2 const &b) const;
     vect2 operator*(vect2 const &b) const;
+
+    vect2 operator-() const;
 
     vect2 &operator+=(vect2 const &b);
     vect2 &operator-=(vect2 const &b);
@@ -37,10 +42,6 @@ public :
 
     bool operator==(vect2 const &b) const;
     bool operator!=(vect2 const &b) const;
-    bool operator<(vect2 const &b) const;
-    bool operator>(vect2 const &b) const;
-    bool operator<=(vect2 const &b) const;
-    bool operator>=(vect2 const &b) const;
 
     int operator[](int b) const;
     int &operator[](int b);
@@ -50,6 +51,7 @@ private :
     int m_y;
 };
 
+vect2 operator*(int b, vect2 const &obj);
 std::ostream &operator<<(std::ostream &output, vect2 const &obj);
 
 #endif

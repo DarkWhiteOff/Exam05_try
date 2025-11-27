@@ -26,19 +26,14 @@ searchable_tree_bg::~searchable_tree_bg()
 
 bool has1(node *t, int v) const
 {
-    if (t == 0)
+    if (t == nullptr)
         return false;
+    if (t->value == v)
+        return (true);
+    else if (v < t->value)
+        return (has1(t->l, v));
     else
-    {
-		has1(t->l);
-		if (t->value != 0)
-        {
-            if (t->value == v)
-                return true;
-        }
-		has1(t->r);
-	}
-    return false;
+        return (has1(t->r, v));
 }
 
 bool searchable_tree_bg::has(int value) const
